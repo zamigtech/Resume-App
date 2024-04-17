@@ -2,7 +2,23 @@ from django.db import models
 
 # Create your models here.
 
-class GeneralSetting(models.Model):
+class AbstractModel(models.Model):
+    updated_date = models.DateTimeField(
+        blank=True,
+        auto_now=True,
+        verbose_name='Updated_date',
+        help_text=''
+    )
+    created_date = models.DateTimeField(
+        blank=True,
+        auto_now_add=True,
+        verbose_name='Created_date',
+        help_text=''
+    )
+    class Meta:
+        abstract = True
+
+class GeneralSetting(AbstractModel):
     name = models.CharField(
         default='',
         max_length=255,
@@ -24,18 +40,7 @@ class GeneralSetting(models.Model):
         verbose_name='Parameters',
         help_text=''
     )
-    updated_date = models.DateTimeField(
-        blank=True,
-        auto_now=True,
-        verbose_name='Updated_date',
-        help_text=''
-    )
-    created_date = models.DateTimeField(
-        blank=True,
-        auto_now_add=True,
-        verbose_name='Created_date',
-        help_text=''
-    )
+
     def __str__(self):
         return f'General Setting: {self.name}'
 
@@ -46,7 +51,7 @@ class GeneralSetting(models.Model):
         verbose_name_plural = 'General Settings'
         ordering = ('name',)
 
-class ImageSetting(models.Model):
+class ImageSetting(AbstractModel):
 
     name = models.CharField(
         default='',
@@ -70,18 +75,7 @@ class ImageSetting(models.Model):
         upload_to='images/',
 
     )
-    updated_date = models.DateTimeField(
-        blank=True,
-        auto_now=True,
-        verbose_name='Updated_date',
-        help_text=''
-    )
-    created_date = models.DateTimeField(
-        blank=True,
-        auto_now_add=True,
-        verbose_name='Created_date',
-        help_text=''
-    )
+
 
     def __str__(self):
         return f'Image Setting: {self.name}'
