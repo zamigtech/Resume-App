@@ -53,7 +53,7 @@ class GeneralSetting(AbstractModel):
         ordering = ('name',)
 
 class ImageSetting(AbstractModel):
-
+#ter
     name = models.CharField(
         default='',
         max_length=255,
@@ -104,3 +104,11 @@ class Skill(AbstractModel):
         help_text='',
         validators=[MinValueValidator(0), MaxValueValidator(100)],
     )
+
+    def __str__(self):
+        return f'Skill: {self.name}'
+
+    class Meta:
+        verbose_name = 'Skill'
+        verbose_name_plural = 'Skill'
+        ordering = ('order',)
