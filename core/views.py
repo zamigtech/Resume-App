@@ -60,6 +60,9 @@ def index(request):
 
 
 
+
+
+
     context={
 
         'skills': skills,
